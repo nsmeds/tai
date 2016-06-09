@@ -1,4 +1,4 @@
-# [CF](http://i.imgur.com/7v5ASc8.png) tai
+# ![CF](http://i.imgur.com/7v5ASc8.png) tai
 a tool for managing student assignment repos
 
 ## demo
