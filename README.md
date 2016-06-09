@@ -9,7 +9,7 @@ tai config [github_organization] [github_token]
 ```
 
 ### run
-to create unique branch for each team and set up travis_token
+to create unique branch for each team and set up travis
 ```
 tai setup [repo_name]
 ```
