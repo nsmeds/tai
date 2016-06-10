@@ -1,6 +1,6 @@
 {
   "name": "tai",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a tool for managing student assignment repos",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codefellows-portland-javascript-401d2/tai.git"
+  },
+  "bin": {
+    "tai": "./bin/tai"
   },
   "author": "Marty Nelson <marty@martypdx.com> (@martypdx)",
   "contributors": ["Annika Hagelin <hagelin.annika@gmail.com> (http://ankihg.herokuapp.com/)"],
