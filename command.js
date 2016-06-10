@@ -34,12 +34,12 @@ program
           .then( () => hooks( repoName, configs ) )
           .then( () => alert( 'hooks complete' ) )
           .catch( err => {
-            alertErr( 'error retreiving configs. run config' )
+            alertErr('error setting up repo');
             console.log(err);
           } );
       })
       .catch(err => {
-        alertErr('error setting up repo');
+        alertErr( 'error retreiving configs. run config' )
         console.log(err);
       })
   })
@@ -61,6 +61,16 @@ program
 
 program
   .command('team <filepath>')
+  .description('set teams to specified json filepath')
+  .action((filepath, options) => {
+    sander.readFile(filepath)
+      .then(data => {
+        alert('setting student teams to \n' + data);
+        return sander.writeFile(__dirname, 'teams.json', data)
+      })
+      .then(() => alert('student teams set'))
+      .catch(() => alertErr('error setting teams'))
+  })
 
 
 program.parse(process.argv)
