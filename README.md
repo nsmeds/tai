@@ -3,12 +3,12 @@ a tool for managing student assignment repos
 
 ## demo
 ### setup
-**to configure tai**
+**config** - to configure tai
 ```
 tai config <github_organization> <github_token>
 ```
 
-**to set teams**
+**team** - to set teams
 ```
 tai team <json_filepath>
 ```
@@ -19,12 +19,12 @@ json file:
 teams must be valid branch names
 
 ### run
-**to create unique branch for each team and set up travis**
+**setup** - to create unique branch for each team and set up travis
 ```
 tai setup <repo_name>
 ```
 
-**to merge team branches into unique folders in master**
+**close** - to merge team branches into unique folders in master
 ```
 tai close <repo_name>
 ```
