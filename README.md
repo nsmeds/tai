@@ -8,6 +8,16 @@ to configure tai
 tai config <github_organization> <github_token>
 ```
 
+to set teams
+```
+tai team <json_filepath>
+```
+json file:
+```
+[ "tad-and-anki", "plz-and-respond" ]
+```
+team names must be valid branch names
+
 ### run
 to create unique branch for each team and set up travis
 ```
