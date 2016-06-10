@@ -8,7 +8,7 @@ const sander = require('sander');
 const {alert, alertErr, getConfigs} = require(__dirname+'/cli-tools');
 
 program
-  .command('config [github_org] [github_token]')
+  .command('config <github_org> <github_token>')
   .description('configure github_org github_token')
   .action((github_org, github_token) => {
     if (!(github_org && github_token)) return alertErr('plz specify github_org github_token')
@@ -23,7 +23,7 @@ program
   })
 
 program
-  .command('setup [repoName]')
+  .command('setup <repoName>')
   .description('create branches for each team')
   .action((repoName, options) => {
     getConfigs()
@@ -45,7 +45,7 @@ program
   })
 
 program
-  .command('close [repoName]')
+  .command('close <repoName>')
   .description('merge student branches into master folders')
   .action((repoName, options) => {
     getConfigs()
@@ -58,5 +58,9 @@ program
         console.log(err);
       })
   })
+
+program
+  .command('team <filepath>')
+
 
 program.parse(process.argv)
