@@ -5,7 +5,7 @@ const hooks = require('./lib/ci-hooks')
 const close = require('./lib/close-out')
 const openGithub = require('./lib/open-github')
 const sander = require('sander');
-const {alert, alertErr, getConfigs} = require(__dirname+'/cli-tools');
+const {alert, alertErr, getConfigs} = require(__dirname+'/lib/cli-tools');
 
 program
   .command('config <github_org> <github_token>')
