@@ -11,15 +11,7 @@ program
   .command('config <github_org> <github_token>')
   .description('configure github_org github_token')
   .action((github_org, github_token) => {
-    if (!(github_org && github_token)) return alertErr('plz specify github_org github_token')
-    let configJson = JSON.stringify({github_org, github_token})
-    sander.exists(__dirname, 'config.json')
-      .then(exists => {
-        if (exists) return sander.unlink(__dirname, 'config.json')
-      })
-      .then(() => {
-        sander.writeFile(__dirname, 'config.json', configJson).then(alert('config complete'))
-      })
+    require(__dirname+'/lib/config.js')(sander, github_org, github_token);
   })
 
 program
