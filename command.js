@@ -3,7 +3,7 @@ const program = require('commander')
 const addBranches = require('./lib/add-branches')
 const hooks = require('./lib/ci-hooks')
 const close = require('./lib/close-out')
-// const config = require( './lib/config' )
+const openGithub = require('./lib/open-github')
 const sander = require('sander');
 const {alert, alertErr, getConfigs} = require(__dirname+'/cli-tools');
 
@@ -70,6 +70,20 @@ program
       })
       .then(() => alert('student teams set'))
       .catch(() => alertErr('error setting teams'))
+  })
+
+program
+  .command('hub <repo_name>')
+  .description('open repo on github')
+  .action((repoName, options) => {
+    getConfigs()
+      .then((configs) => {
+        openGithub(repoName, configs)
+      })
+      .catch(err => {
+        alertErr(err);
+        console.log(err);
+      })
   })
 
 
