@@ -15,7 +15,7 @@ program
     let configJson = JSON.stringify({github_org, github_token})
     sander.exists(__dirname, 'config.json')
       .then(exists => {
-        if (exists) return sander.unlink(__dirname, 'config.json');
+        if (exists) return sander.unlink(__dirname, 'config.json')
       })
       .then(() => {
         sander.writeFile(__dirname, 'config.json', configJson).then(alert('config complete'))
