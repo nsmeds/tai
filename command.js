@@ -42,13 +42,17 @@ program
   });
 
 program
-  .command('team <filepath>')
+  .command('team [filepath]')
   .description('set teams to specified json filepath')
   .action((filepath) => {
+    if (!filepath && prefs.students) {
+      alert('Teams currently set to: ');
+      return console.log(prefs.students);
+    }
     sander.readFile(filepath)
       .then(data => {
         alert('setting student teams to \n' + data);
-        prefs.students = data;
+        prefs.students = data.toString();
       })
       .catch((err) => {
         alertErr('error setting teams');
@@ -57,7 +61,7 @@ program
   });
 
 program
-  .command('hub <repo_name>')
+  .command('open <repo_name>')
   .description('open repo on github')
   .action((repoName) => {
     openGithub(repoName, prefs);
