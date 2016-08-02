@@ -1,18 +1,17 @@
-'use strict';
-const program = require('commander')
-const addBranches = require('./lib/add-branches')
-const hooks = require('./lib/ci-hooks')
-const close = require('./lib/close-out')
-const openGithub = require('./lib/open-github')
+const program = require('commander');
+const addBranches = require('./lib/add-branches');
+const hooks = require('./lib/ci-hooks');
+const close = require('./lib/close-out');
+const openGithub = require('./lib/open-github');
 const sander = require('sander');
-const {alert, alertErr, getConfigs} = require(__dirname+'/lib/cli-tools');
+const {alert, alertErr, getConfigs} = require('./lib/cli-tools');
 
 program
   .command('config <github_org> <github_token>')
   .description('configure github_org github_token')
   .action((github_org, github_token) => {
-    require(__dirname+'/lib/config.js')(sander, github_org, github_token);
-  })
+    require('./lib/config.js')(sander, github_org, github_token);
+  });
 
 program
   .command('setup <repoName>')
@@ -31,10 +30,10 @@ program
           } );
       })
       .catch(err => {
-        alertErr( 'error retreiving configs. run config' )
+        alertErr('error retreiving configs. run config');
         console.log(err);
-      })
-  })
+      });
+  });
 
 program
   .command('close <repoName>')
@@ -48,8 +47,8 @@ program
       .catch(err => {
         alertErr('error retreiving configs. run config');
         console.log(err);
-      })
-  })
+      });
+  });
 
 program
   .command('team <filepath>')
@@ -58,11 +57,11 @@ program
     sander.readFile(filepath)
       .then(data => {
         alert('setting student teams to \n' + data);
-        return sander.writeFile(__dirname, 'teams.json', data)
+        return sander.writeFile('.teams.json', data);
       })
       .then(() => alert('student teams set'))
-      .catch(() => alertErr('error setting teams'))
-  })
+      .catch(() => alertErr('error setting teams'));
+  });
 
 program
   .command('hub <repo_name>')
@@ -70,13 +69,12 @@ program
   .action((repoName, options) => {
     getConfigs()
       .then((configs) => {
-        openGithub(repoName, configs)
+        openGithub(repoName, configs);
       })
       .catch(err => {
         alertErr(err);
         console.log(err);
-      })
-  })
+      });
+  });
 
-
-program.parse(process.argv)
+program.parse(process.argv);

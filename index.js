@@ -1,4 +1,4 @@
-require(__dirname + '/command.js')
+require('./command.js');
 
 // const addBranches = require( './lib/add-branches' );
 // const hooks = require( './lib/ci-hooks' );
