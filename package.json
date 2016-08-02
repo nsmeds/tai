@@ -4,7 +4,8 @@
   "description": "a tool for managing student assignment repos",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "tai": "node ./bin/tai"
   },
   "repository": {
     "type": "git",
@@ -24,8 +25,10 @@
   },
   "homepage": "https://github.com/codefellows-portland-javascript-401d2/tai#readme",
   "dependencies": {
+    "chai": "^3.5.0",
     "chalk": "^1.1.3",
     "github-api": "^1.2.1",
+    "mocha": "^3.0.0",
     "nodegit": "^0.13.1",
     "preferences": "^0.2.1",
     "request": "^2.72.0",

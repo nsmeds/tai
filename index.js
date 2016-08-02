@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 
 const program = require('commander');
-const addBranches = require('./lib/add-branches');
+const sander = require('sander');
+const Preferences = require('preferences');
+
 const hooks = require('./lib/ci-hooks');
 const close = require('./lib/close-out');
 const openGithub = require('./lib/open-github');
-const sander = require('sander');
+const addBranches = require('./lib/add-branches');
 const {alert, alertErr} = require('./lib/cli-tools');
-const Preferences = require('preferences');
+
 const prefs = new Preferences('tai');
 
 program
@@ -18,20 +20,20 @@ program
     prefs.github_token = github_token;
   });
 
+
 program
   .command('setup <repoName>')
+  .option('-b, --branches', 'specify a custom list of branches in json format')
   .description('create branches for each team')
   .action((repoName) => {
+    prefs.branches = program.branches ? JSON.parse(program.branches) : prefs.branches;
     if (!prefs) return alertErr('No configuration found.  run config');
     if (!repoName) return alertErr('No repo specified.');
     addBranches( repoName, prefs )
       .then( () => alert( 'branches created' ) )
       .then( () => hooks( repoName, prefs ) )
       .then( () => alert( 'hooks complete' ) )
-      .catch( err => {
-        alertErr('error setting up repo');
-        console.log(err);
-      });
+      .catch( () => alertErr('error setting up repo'));
   });
 
 program
@@ -40,7 +42,12 @@ program
   .action((repoName) => {
     if (!prefs) return alertErr('No configuration found.  run config');
     if (!repoName) return alertErr('No repo specified.');
-    close(repoName, prefs);
+    close(repoName, prefs)
+      .then( () => alert(`repo "${repoName}" closed out`))
+      .catch(err => {
+        alertErr('error closing repo');
+        alertErr(err);
+      });
   });
 
 program
@@ -65,8 +72,7 @@ program
 program
   .command('open <repo_name>')
   .description('open repo on github')
-  .action((repoName) => {
-    openGithub(repoName, prefs);
-  });
+  .action(repoName => openGithub(repoName, prefs));
+
 
 program.parse(process.argv);
