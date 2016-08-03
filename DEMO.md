@@ -1,13 +1,28 @@
+tai
+===
 
-* config TAI
-    * Use `tai` `config`
-        * Github Organization and an API token
-    * Use `tai` `team` for default branch list (student github accounts)
+`tai` is a cli tool available via `npm i tai -g` that assists in
+setting up and closing assignment github repos.
 
-* For each lab:
-    * Create destination branch with `tai` `setup` command
+Current usage is `401JS` focused:
+    * Students are expected to "own" their repo
+    * TravisCI integration for linting and running tests prior to grading
+    * Github PR infrastructure leveraged for code feedback
+    * Doesn't mean it couldn't be adapted for 201, 301
+
+Workflow:
+
+## Configuration
+* Use `tai` `config`
+    * Store your Github Organization and an API token
+    * (Not tesed with 2-factor GH auth)
+* Use `tai` `team` for default branch list (student github accounts)
+
+## For each lab assignment:
+    * Create destination branches with `tai` `setup` command
         * Configured with `tai` `team`
         * Or, ad-hoc with `setup` command (pairing teams, etc)
+    * Turns on TravisCI hooks
     * Student forks, codes, PR's 
     * Travis runs `npm test`!
     * (Next phase: auto-deployed to heroku)
@@ -24,3 +39,4 @@
         * Commits are merged into `master` (or whatever default branch is for repo)
         * Of non-forked repo
     * `tai` `close` merges all student branches into named folder in master
+    
