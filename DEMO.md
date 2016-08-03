@@ -1,4 +1,4 @@
-tai
+tai (TA + AI)
 ===
 
 `tai` is a cli tool available via `npm i tai -g` that assists in
