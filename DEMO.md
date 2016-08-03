@@ -18,17 +18,18 @@ Workflow:
     * (Not tesed with 2-factor GH auth)
 * Use `tai` `team` for default branch list (student github accounts)
 
-## For each lab assignment:
-    * Create destination branches with `tai` `setup` command
-        * Configured with `tai` `team`
-        * Or, ad-hoc with `setup` command (pairing teams, etc)
-    * Turns on TravisCI hooks
-    * Student forks, codes, PR's 
-    * Travis runs `npm test`!
-    * (Next phase: auto-deployed to heroku)
-    * Grade Assignment, commenting in PR
-    * Students can resubmit during grading phase, or after
-    * Merge PR when grading complete
+## For each lab assignment
+
+* Create destination branches with `tai` `setup` command
+    * Configured with `tai` `team`
+    * Or, ad-hoc with `setup` command (pairing teams, etc)
+* Turns on TravisCI hooks
+* Student forks, codes, PR's 
+* Travis runs `npm test`!
+* (Next phase: auto-deployed to heroku)
+* Grade Assignment, commenting in PR
+* Students can resubmit during grading phase, or after
+* Merge PR when grading complete
 
 * Follow-on labs:
     * student codes, PR's
