@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "tai": "node ./bin/tai"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
