@@ -38,14 +38,17 @@ program
   .description('Create branches for the specified team.')
   .action((repoName, options) => {
     if (!prefs.github_org) return alertErr('No configuration found.  run config');
-    prefs.branches = options.branches ? JSON.parse(options.branches) : prefs.branches;
+    prefs.branches = options.branches ? JSON.parse(options.branches) : prefs.students;
     addBranches( repoName, prefs )
       .then(() => {
         alert( 'branches created' );
         hooks( repoName, prefs );
         alert( 'hooks complete' );
       })
-      .catch( () => alertErr('error setting up repo'));
+      .catch( (err) =>  {
+        console.log('Error setting up repo: ',err);
+        alertErr('error setting up repo')
+      });
   });
 
 program
