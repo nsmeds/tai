@@ -46,3 +46,6 @@ Workflow:
     * Of non-forked repo
 * `tai` `close` merges all student branches into named folder in master
     
+## Thank You!
+* Annika Hagelin
+* David Goodwin
