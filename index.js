@@ -13,9 +13,20 @@ const {alert, alertErr} = require('./lib/cli-tools');
 const prefs = new Preferences('tai');
 
 program
-  .command('config <github_org> <github_token>')
-  .description('configure github_org github_token')
-  .action((github_org, github_token) => {
+  .command('config [github_org] [github_token]')
+  .option('-s, --show', 'display current Github organization')
+  .option('-d, --delete', 'delete current Github configuration')
+  .description('Configure Github org and auth token.')
+  .action((github_org, github_token, options) => {
+    if (options.show) {
+      if (prefs.github_org) return alert(`Current selected organization is ${prefs.github_org}`);
+      else return alert('There is no current Github organization selected.');
+    }
+    if (options.delete) {
+      prefs.github_org = undefined;
+      prefs.github_token = undefined;
+      return alertErr('Github configuration has been removed.');
+    }
     prefs.github_org = github_org;
     prefs.github_token = github_token;
   });
@@ -24,15 +35,16 @@ program
 program
   .command('setup <repoName>')
   .option('-b, --branches', 'specify a custom list of branches in json format')
-  .description('create branches for each team')
-  .action((repoName) => {
-    prefs.branches = program.branches ? JSON.parse(program.branches) : prefs.branches;
-    if (!prefs) return alertErr('No configuration found.  run config');
-    if (!repoName) return alertErr('No repo specified.');
+  .description('Create branches for the specified team.')
+  .action((repoName, options) => {
+    if (!prefs.github_org) return alertErr('No configuration found.  run config');
+    prefs.branches = options.branches ? JSON.parse(options.branches) : prefs.branches;
     addBranches( repoName, prefs )
-      .then( () => alert( 'branches created' ) )
-      .then( () => hooks( repoName, prefs ) )
-      .then( () => alert( 'hooks complete' ) )
+      .then(() => {
+        alert( 'branches created' );
+        hooks( repoName, prefs );
+        alert( 'hooks complete' );
+      })
       .catch( () => alertErr('error setting up repo'));
   });
 
@@ -41,7 +53,6 @@ program
   .description('merge student branches into master folders')
   .action((repoName) => {
     if (!prefs) return alertErr('No configuration found.  run config');
-    if (!repoName) return alertErr('No repo specified.');
     close(repoName, prefs)
       .then( () => alert(`repo "${repoName}" closed out`))
       .catch(err => {
