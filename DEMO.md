@@ -20,24 +20,29 @@ Workflow:
 
 ## For each lab assignment
 
-* Create destination branches with `tai` `setup` command
+* Create branches and hooks with `tai` `setup` command
     * Configured with `tai` `team`
     * Or, ad-hoc with `setup` command (pairing teams, etc)
-* Turns on TravisCI hooks
-* Student forks, codes, PR's 
+    * Turns on TravisCI hooks
+
+* Student/team:
+    * fork
+    * code
+    * PR
 * Travis runs `npm test`!
-* (Next phase: auto-deployed to heroku)
-* Grade Assignment, commenting in PR
-* Students can resubmit during grading phase, or after
-* Merge PR when grading complete
+    * (Next phase: auto-deployed to heroku)
+* Leverage Github PR
+    * Grade Assignment, commenting in PR
+    * Students can resubmit during grading phase, or after
+    * Merge PR when grading complete
 
-* Follow-on labs:
-    * student codes, PR's
-    * (make sure previous PR's are merged)
+## Follow-on labs
+* student codes, PR's
+* (make sure previous PR's are merged)
 
-* Close out:
-    * Github does not count commits for heatmap unless:
-        * Commits are merged into `master` (or whatever default branch is for repo)
-        * Of non-forked repo
-    * `tai` `close` merges all student branches into named folder in master
+## Close out
+* Github does not count commits for heatmap unless:
+    * Commits are merged into `master` (or whatever default branch is for repo)
+    * Of non-forked repo
+* `tai` `close` merges all student branches into named folder in master
     
