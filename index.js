@@ -12,23 +12,31 @@ const {alert, alertErr} = require('./lib/cli-tools');
 
 const prefs = new Preferences('tai');
 
+
 program
-  .command('config [github_org] [github_token]')
-  .option('-s, --show', 'display current Github organization')
-  .option('-d, --delete', 'delete current Github configuration')
+  .command('config <github_org> <github_token>')
   .description('Configure Github org and auth token.')
-  .action((github_org, github_token, options) => {
-    if (options.show) {
-      if (prefs.github_org) return alert(`Current selected organization is ${prefs.github_org}`);
-      else return alert('There is no current Github organization selected.');
-    }
-    if (options.delete) {
-      prefs.github_org = undefined;
-      prefs.github_token = undefined;
-      return alertErr('Github configuration has been removed.');
-    }
+  .action((github_org, github_token) => {
     prefs.github_org = github_org;
     prefs.github_token = github_token;
+  });
+
+
+program
+  .command('org')
+  .description('Display current Github organization.')
+  .action(() => {
+    if (prefs.github_org) return alert(`Current selected organization is ${prefs.github_org}`);
+    else return alert('There is no current Github organization selected.');
+  });
+
+program
+  .command('clear')
+  .description('Clear current Github org and auth token.')
+  .action(() => {
+    prefs.github_org = undefined;
+    prefs.github_token = undefined;
+    return alertErr('Github configuration has been removed.');
   });
 
 
@@ -47,7 +55,7 @@ program
       })
       .catch( (err) =>  {
         console.log('Error setting up repo: ',err);
-        alertErr('error setting up repo')
+        alertErr('error setting up repo');
       });
   });
 
