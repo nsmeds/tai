@@ -1,8 +1,7 @@
 # ![CF](http://i.imgur.com/7v5ASc8.png) tai
 a tool for managing student assignment repos
 
-## demo
-### setup
+## setup
 **tai config** - to configure tai
 ```
 tai config <github_organization> <github_token>
@@ -26,7 +25,7 @@ json file:
 ```
 teams must be valid branch names
 
-### run
+## run
 **tai setup** - to create unique branch for each team and set up travis.  
 Optional [branches] flag available to specify a set of branches different from the stored team.  JSON format required.
 ```
