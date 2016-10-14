@@ -33,6 +33,7 @@
     "preferences": "^0.2.1",
     "request": "^2.72.0",
     "sander": "^0.5.1",
+    "simple-git": "^1.54.0",
     "sync-exec": "^0.6.2"
   }
 }
