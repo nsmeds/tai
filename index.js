@@ -49,12 +49,23 @@ program
     addBranches( repoName, prefs )
       .then(() => {
         alert( 'branches created' );
-        hooks( repoName, prefs );
-        alert( 'hooks complete' );
       })
       .catch( (err) => {
         alertErr('Error setting up repo.');
         alertErr(err);
+      });
+  });
+
+program
+  .command('hooks <repoName>')
+  .description('Create hooks.')
+  .action((repoName) => {
+    hooks(repoName, prefs)
+      .then(() => {
+        alert( 'hooks complete' );
+      })
+      .catch( err => {
+        alertErr('error creating hooks: ', err);
       });
   });
 
